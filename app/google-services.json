@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "846333528056",
+    "project_id": "bikenest-89efb",
+    "storage_bucket": "bikenest-89efb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846333528056:android:09cb14332cfdbf1643380d",
+        "android_client_info": {
+          "package_name": "com.example.bikenest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846333528056-gvlc6h091auihjk6o0mg5m61vbck6hon.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bikenest",
+            "certificate_hash": "6d0f08e4c3d104581f98850c2b0ce8fad7c08fca"
+          }
+        },
+        {
+          "client_id": "846333528056-cgsmb0eserden88r4gq77bh05e935mdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-v0JnGWt6QeXJ5q76P96gxKuxLlyGWEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846333528056-cgsmb0eserden88r4gq77bh05e935mdn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
