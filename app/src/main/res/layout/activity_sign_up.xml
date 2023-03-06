@@ -79,12 +79,11 @@
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:gravity="center"
-            android:padding="40dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:padding="40dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline12"
+            app:layout_constraintStart_toStartOf="@+id/guideline11"
             app:layout_constraintTop_toBottomOf="@+id/imageView5">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -97,22 +96,22 @@
                 android:textColorHint="#50ffffff"
                 app:boxStrokeColor="#00000000"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintTextColor="@color/white"
                 app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:counterTextColor="@color/white"
+                app:hintTextColor="@color/white"
                 app:placeholderText="Hey Rider"
-                app:placeholderTextColor="#50ffffff"
-                app:counterMaxLength="12"
-                app:counterTextColor="@color/white">
+                app:placeholderTextColor="#50ffffff">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/personName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/personName"
                     android:background="#00000000"
-                    android:textColor="@color/white"
+                    android:inputType="textPersonName"
+                    android:maxLength="20"
                     android:maxLines="1"
-                    android:maxLength="12"
-                    android:inputType="textPersonName"/>
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -121,26 +120,27 @@
                 android:layout_marginTop="35dp"
                 android:background="@drawable/edittextbg2"
                 android:gravity="center"
-                android:hint="Phone Number"
+                android:hint="Enter Your E-mail"
                 android:textColorHint="#50ffffff"
                 app:boxStrokeColor="#00000000"
                 app:boxStrokeWidthFocused="0dp"
-                app:hintTextColor="@color/white"
                 app:counterEnabled="true"
-                app:counterMaxLength="10"
+                app:counterMaxLength="30"
+                app:counterTextColor="@color/white"
+                app:hintTextColor="@color/white"
                 app:placeholderText="0000000000"
-                app:placeholderTextColor="#50ffffff"
-                app:counterTextColor="@color/white">
+                app:placeholderTextColor="#50ffffff">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EmailET"
+                    android:contentDescription="EmailField"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/phoneNumberET"
                     android:background="#00000000"
-                    android:textColor="@color/white"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="30"
                     android:maxLines="1"
-                    android:maxLength="12"
-                    android:inputType="numberDecimal"/>
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -154,19 +154,45 @@
                 app:boxStrokeWidthFocused="0dp"
                 app:hintTextColor="@color/white"
                 app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#90ffffff"
                 app:placeholderText="xxxxxx"
-                app:placeholderTextColor="#50ffffff"
-                app:passwordToggleTint="#90ffffff">
+                app:placeholderTextColor="#50ffffff">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/UserPasswordForSignup"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/UserPasswordForSignup"
                     android:background="#00000000"
-                    android:textColor="@color/white"
-                    android:maxLines="1"
+                    android:inputType="textPassword"
                     android:maxLength="15"
-                    android:inputType="textPassword"/>
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/edittextbg2"
+                android:hint="Re-Enter Your Password"
+                android:textColorHint="#50ffffff"
+                app:boxStrokeColor="#00000000"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintTextColor="@color/white"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#90ffffff"
+                app:placeholderText="xxxxxx"
+                app:placeholderTextColor="#50ffffff">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/UserPasswordForSignupConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00000000"
+                    android:inputType="textPassword"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>

@@ -9,33 +9,37 @@ import com.google.android.material.textfield.TextInputEditText
 class Sign_up : AppCompatActivity() {
     private lateinit var  sendOTPBtn:AppCompatButton
     private lateinit var  personName:TextInputEditText
-    private lateinit var  phoneNumberET:TextInputEditText
+    private lateinit var  EmailET:TextInputEditText
     private lateinit var  UserPasswordForSignup:TextInputEditText
+    private lateinit var UserPasswordForSignupConfirm:TextInputEditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
         sendOTPBtn=findViewById(R.id.sendOTPBtn)
         personName=findViewById(R.id.personName)
-        phoneNumberET=findViewById(R.id.phoneNumberET)
+        EmailET=findViewById(R.id.EmailET)
         UserPasswordForSignup=findViewById(R.id.UserPasswordForSignup)
+        UserPasswordForSignupConfirm=findViewById(R.id.UserPasswordForSignupConfirm)
 
         sendOTPBtn.setOnClickListener {
 
             if (personName.text.toString().isEmpty()) {
                 personName.setError("Please Enter Your Name")
                 personName.requestFocus()
-            } else if (phoneNumberET.text.toString().isEmpty()) {
-                phoneNumberET.setError("Enter your Number")
-                phoneNumberET.requestFocus()
+            } else if (EmailET.text.toString().isEmpty()) {
+                EmailET.setError("Enter your Number")
+                EmailET.requestFocus()
             } else if (UserPasswordForSignup.text.toString().isEmpty()) {
                 UserPasswordForSignup.setError("Enter Your Password")
                 UserPasswordForSignup.requestFocus()
-            } else if (phoneNumberET.text.toString().length == 10) {
+            } else if (UserPasswordForSignup.text.toString().equals(UserPasswordForSignupConfirm.text.toString())) {
                 startActivity(Intent(this, Otp::class.java))
             } else {
-                phoneNumberET.setError("Enter The Correct Number")
-                phoneNumberET.requestFocus()
+                UserPasswordForSignup.setError("Mismatched the Passwords")
+                UserPasswordForSignup.requestFocus()
+                UserPasswordForSignupConfirm.setError("Mismatched")
+                UserPasswordForSignupConfirm.requestFocus()
             }
         }
 
