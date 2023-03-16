@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
-                android:hint="Phone Number    📞"
+                android:hint="E-mail"
                 android:textColorHint="#50000000"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
@@ -121,8 +121,9 @@
                     android:id="@+id/UserPhoneNumber"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:maxLength="12"
+                    android:text="supriya.swain2018@gmail.com"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="30"
                     tools:layout_editor_absoluteX="55dp"
                     tools:layout_editor_absoluteY="390dp" />
 
@@ -156,6 +157,7 @@
                     android:id="@+id/PasswordForLogin"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
+                    android:text="supriya"
                     android:inputType="textPassword"
                     tools:layout_editor_absoluteX="55dp"
                     tools:layout_editor_absoluteY="470dp" />

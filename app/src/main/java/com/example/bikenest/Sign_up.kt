@@ -1,5 +1,6 @@
 package com.example.bikenest
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -70,6 +71,18 @@ class Sign_up : AppCompatActivity() {
                                 val firebaseUser: FirebaseUser =task.result!!.user!!
                                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
 
+
+                                val User = hashMapOf(
+                                    "Name" to "${personName.text.toString()}",
+                                    "Mail" to "$email",
+                                    "Password" to "$password"
+                                )
+                                val document=FirebaseAuth.getInstance().currentUser?.uid
+
+                                db.collection("User").document("${document}")
+                                    .set(User)
+                                    .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+                                    .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
 
                                 Toast.makeText(this, "${auth.uid}", Toast.LENGTH_SHORT).show()
                             }

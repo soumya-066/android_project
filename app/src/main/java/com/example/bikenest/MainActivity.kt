@@ -1,10 +1,12 @@
 package com.example.bikenest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -37,7 +39,12 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(FavFragment())
                     true
                 }
+                R.id.Support -> {
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(this,Login::class.java))
+                    true
 
+                }
                 else -> {
                     loadFragment(HomeFragment())
                     true

@@ -5,14 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".FavFragment"
     android:layout_gravity="center"
-    android:background="#ffff00">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    android:background="@color/background">
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is The favourite Page"
-        android:textSize="20sp"/>
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 </FrameLayout>

@@ -4,9 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.Toolbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class Welcome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,12 +27,30 @@ class Welcome : AppCompatActivity() {
         splashToolbar.startAnimation(slideAnimation)
         // we used the postDelayed(Runnable, time) method
         // to send a message with a delayed time.
-        Handler().postDelayed({
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-            finish()
-        }, 2600)
+        load()
 
 
     }
+
+    private fun load(){
+        val firebaseUser: FirebaseUser?= FirebaseAuth.getInstance().currentUser
+        if (firebaseUser==null) {
+            Handler(Looper.getMainLooper()).postDelayed({
+                val i = Intent(this, Login::class.java)
+                startActivity(i)
+                finish()
+            }, 2500)
+        }
+        else{
+            Handler(Looper.getMainLooper()).postDelayed({
+                val i = Intent(this, MainActivity::class.java)
+                startActivity(i)
+                finish()
+            }, 2500)
+
+        }
+
+    }
+
+
 }
