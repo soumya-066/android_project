@@ -19,16 +19,16 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav=findViewById(R.id.bottomNavigationView)
 
-        val Home=findViewById<FloatingActionButton>(R.id.Home)
-        Home.setOnClickListener{
-            loadFragment(HomeFragment())
+        val Profile=findViewById<FloatingActionButton>(R.id.Profile)
+        Profile.setOnClickListener{
+            loadFragment(ProfileFragment())
         }
 
         loadFragment(HomeFragment())
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.Profile -> {
-                    loadFragment(ProfileFragment())
+                R.id.Home -> {
+                    loadFragment(HomeFragment())
                     true
                 }
                 R.id.Wallet -> {
