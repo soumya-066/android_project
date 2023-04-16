@@ -32,16 +32,15 @@ class Welcome : AppCompatActivity() {
 
     }
 
-    private fun load(){
-        val firebaseUser: FirebaseUser?= FirebaseAuth.getInstance().currentUser
-        if (firebaseUser==null) {
+    private fun load() {
+        val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+        if (firebaseUser == null) {
             Handler(Looper.getMainLooper()).postDelayed({
                 val i = Intent(this, Login::class.java)
                 startActivity(i)
                 finish()
             }, 2500)
-        }
-        else{
+        } else {
             Handler(Looper.getMainLooper()).postDelayed({
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)

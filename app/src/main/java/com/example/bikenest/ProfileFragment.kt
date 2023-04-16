@@ -26,9 +26,9 @@ class ProfileFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    lateinit var Username:TextView
-    lateinit var email:TextView
-    lateinit var Password:TextView
+    lateinit var Username: TextView
+    lateinit var email: TextView
+    lateinit var Password: TextView
 
     var name: String? = ""
     var mail: String? = ""
@@ -73,9 +73,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Username=view.findViewById(R.id.Username)
-        email=view.findViewById(R.id.email)
-        Password=view.findViewById(R.id.Password)
+        Username = view.findViewById(R.id.Username)
+        email = view.findViewById(R.id.email)
+        Password = view.findViewById(R.id.Password)
 
 //        Username.isFocusable=false
 //        email.isFocusable=false
@@ -88,17 +88,17 @@ class ProfileFragment : Fragment() {
             Log.i("fetch", "${it.getString("Name")}")
             if (it.exists()) {
                 name = it.getString("Name")
-                Username.setText(" "+"$name")
+                Username.setText(" " + "$name")
             }
             Log.i("fetch", "${it.getString("Mail")}")
             if (it.exists()) {
-               mail = it.getString("Mail").toString()
-                email.setText(" "+"$mail")
+                mail = it.getString("Mail").toString()
+                email.setText(" " + "$mail")
             }
             Log.i("fetch", "${it.getString("Password")}")
             if (it.exists()) {
                 Pass = it.getString("Password").toString()
-                Password.setText(" "+"$Pass")
+                Password.setText(" " + "$Pass")
             }
 
         }

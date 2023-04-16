@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         Profile.setOnClickListener{
             loadFragment(ProfileFragment())
         }
-
         loadFragment(HomeFragment())
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
     private  fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container,fragment)
+        transaction.replace(R.id.container1,fragment)
         transaction.commit()
     }
 }

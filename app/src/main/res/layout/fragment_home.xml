@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="20dp"
+    android:padding="15dp"
     tools:context=".HomeFragment">
 
     <TableLayout
@@ -73,5 +73,124 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:elevation="90dp"
+            android:background="#05000000">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/Hondabtn"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/honda"
+                android:scaleType="fitXY"
+                android:contentDescription="Honda"
+                android:elevation="15dp"/>
+            <ImageView
+                android:id="@+id/Hero"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/hero"
+                android:scaleType="fitXY"
+                android:elevation="15dp"
+                android:contentDescription="Honda"
+                android:layout_marginStart="25dp"/>
+            <ImageView
+                android:id="@+id/Royalenfield"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/royalenfield"
+                android:scaleType="fitXY"
+                android:elevation="15dp"
+                android:contentDescription="Honda"
+                android:layout_marginStart="25dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/Bajaj"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/bajaj"
+                android:scaleType="fitXY"
+                android:contentDescription="Honda"
+                android:elevation="15dp"
+                android:layout_marginTop="10dp"/>
+            <ImageView
+                android:id="@+id/KTM"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ktm"
+                android:scaleType="fitXY"
+                android:elevation="15dp"
+                android:contentDescription="Honda"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"/>
+            <ImageView
+                android:id="@+id/BMW"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/bmw"
+                android:scaleType="fitXY"
+                android:elevation="15dp"
+                android:contentDescription="Honda"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:id="@+id/parent_of_home"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:gravity="center">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/offline"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:lottie_autoPlay="true"
+        android:layout_gravity="center"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/offline"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/offlinetext"
+            android:text="YOU ARE OFFLINE \n PLEASE CONNECT TO THE NETWORK"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/try_again"
+            android:text="Try Again"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_medium"/>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
