@@ -2,6 +2,7 @@ package com.example.bikenest
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -26,6 +28,7 @@ class HomeFragment : Fragment() {
 
     lateinit var textview: TextView
     lateinit var textView3: TextView
+    lateinit var Honda:ImageView
     val db = Firebase.firestore
     var name: String? = ""
 
@@ -39,9 +42,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val offline = view.findViewById<LottieAnimationView>(R.id.offline)
+        Honda=view.findViewById(R.id.Honda)
+        var Hero=view.findViewById<ImageView>(R.id.Hero)
+        var Royalenfield=view.findViewById<ImageView>(R.id.Royalenfield)
+        var Bajaj=view.findViewById<ImageView>(R.id.Bajaj)
+        var KTM=view.findViewById<ImageView>(R.id.KTM)
+        var BMW=view.findViewById<ImageView>(R.id.BMW)
 
-        if (ConnectionManager().checkConnectivity(activity as Context)){
+
             textview = view.findViewById(R.id.textView)
         var use = FirebaseAuth.getInstance().currentUser?.uid
         val docRef = FirebaseFirestore.getInstance().collection("User")
@@ -60,19 +68,39 @@ class HomeFragment : Fragment() {
             //textview.text = name
 
         }
-    }else{
-            val try_again=view.findViewById<Button>(R.id.try_again)
-            val parent_of_home=view.findViewById<LinearLayout>(R.id.parent_of_home)
-            val offlinetext=view.findViewById<TextView>(R.id.offlinetext)
-            parent_of_home.visibility=View.VISIBLE
-            try_again.setOnClickListener {
-                if (ConnectionManager().checkConnectivity(activity as Context)){
-                    parent_of_home.visibility=View.INVISIBLE
-                }else{
-                    parent_of_home.visibility=View.VISIBLE
-                }
-            }
-
+        Honda.setOnClickListener {
+            var a=Intent(context,BikeList::class.java)
+            a.putExtra("brand","Honda")
+            startActivity(a)
         }
+        Hero.setOnClickListener {
+            var a=Intent(context,BikeList::class.java)
+            a.putExtra("brand","Hero")
+            startActivity(a)
+        }
+        Royalenfield.setOnClickListener {
+            var a=Intent(context,BikeList::class.java)
+            a.putExtra("brand","Royalenfield")
+            startActivity(a)
+        }
+        Bajaj.setOnClickListener {
+            var a=Intent(context,BikeList::class.java)
+            a.putExtra("brand","Bajaj")
+            startActivity(a)
+        }
+        KTM.setOnClickListener {
+            var a=Intent(context,BikeList::class.java)
+            a.putExtra("brand","KTM")
+            startActivity(a)
+        }
+        BMW.setOnClickListener {
+            var a=Intent(context,BikeList::class.java)
+            a.putExtra("brand","BMW")
+            startActivity(a)
+        }
+
+
+
+
     }
 }
