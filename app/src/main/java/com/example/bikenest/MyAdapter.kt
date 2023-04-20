@@ -39,6 +39,7 @@ class MyAdapter(val context: Context,private val dataList: List<BikeModel>) : Re
             intent.putExtra("URL","${currentItem.imageurl}")
             intent.putExtra("Model","${currentItem.name}")
             intent.putExtra("Brand","${currentItem.Brand}")
+            intent.putExtra("Price","${currentItem.Price}")
             context.startActivity(intent)
         }
     }

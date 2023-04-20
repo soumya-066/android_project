@@ -19,23 +19,24 @@ class BikeList : AppCompatActivity() {
     val db = Firebase.firestore
     val dataList = arrayListOf<BikeModel>()
 
-    lateinit var Bikerecycle:RecyclerView
+    lateinit var Bikerecycle: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bike_list)
-        var tabLayout=findViewById<androidx.appcompat.widget.Toolbar>(R.id.tabLayout)
+        var tabLayout = findViewById<androidx.appcompat.widget.Toolbar>(R.id.tabLayout)
         setSupportActionBar(tabLayout)
-        supportActionBar?.title="Bikes"
-
-var brandvalue=intent.getStringExtra("brand").toString()
+        supportActionBar?.title = "Bikes"
 
 
-        Bikerecycle=findViewById(R.id.Bikerecycle)
+        var brandvalue = intent.getStringExtra("brand").toString()
+
+
+        Bikerecycle = findViewById(R.id.Bikerecycle)
         lateinit var layoutManager: RecyclerView.LayoutManager
 
         db.collection("Bikes")
-            .whereEqualTo("Brand",brandvalue)
+            .whereEqualTo("Brand", brandvalue)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -47,14 +48,15 @@ var brandvalue=intent.getStringExtra("brand").toString()
                     val mileage = document.getString("Mileage") ?: ""
                     val Power = document.getString("Power") ?: ""
                     val imageUrl = document.getString("Imageurl") ?: ""
-                    val myData = BikeModel(name,Brand,price,engine,description,mileage,Power,imageUrl)
+                    val myData =
+                        BikeModel(name, Brand, price, engine, description, mileage, Power, imageUrl)
                     dataList.add(myData)
                 }
                 lateinit var bikerecycleradapter: MyAdapter
                 layoutManager = LinearLayoutManager(this)
-                bikerecycleradapter = MyAdapter(this ,dataList)
-                Bikerecycle.adapter=bikerecycleradapter
-                Bikerecycle.layoutManager=layoutManager
+                bikerecycleradapter = MyAdapter(this, dataList)
+                Bikerecycle.adapter = bikerecycleradapter
+                Bikerecycle.layoutManager = layoutManager
 
 //                Bikerecycle.addItemDecoration(
 //                    DividerItemDecoration(Bikerecycle.context,
@@ -65,7 +67,6 @@ var brandvalue=intent.getStringExtra("brand").toString()
             .addOnFailureListener { exception ->
                 Log.e(TAG, "Error getting documents: ", exception)
             }
-
 
 
     }

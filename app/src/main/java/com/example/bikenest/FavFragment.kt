@@ -1,10 +1,20 @@
 package com.example.bikenest
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,43 +27,112 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FavFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var FavouriteRecycler:RecyclerView
+    lateinit var favouritetab:androidx.appcompat.widget.Toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view=inflater.inflate(R.layout.fragment_fav, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fav, container, false)
+        FavouriteRecycler=view.findViewById(R.id.FavouriteRecycler)
+        favouritetab=view.findViewById(R.id.favouritetab)
+
+
+        (activity as AppCompatActivity).setSupportActionBar(favouritetab)
+        (activity as AppCompatActivity).supportActionBar?.title="Favourites"
+        lateinit var layoutManager: RecyclerView.LayoutManager
+        lateinit var bikerecycleradapter: MyAdapter
+        layoutManager = LinearLayoutManager(activity)
+        val db = Firebase.firestore
+        val dataList = arrayListOf<BikeModel>()
+        ////////////////////////////////////////////////
+
+
+        db.collection("User").document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .collection("Favourites")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val name = document.getString("Name") ?: ""
+                    val Brand = document.getString("Brand") ?: ""
+                    val price = document.getString("Price") ?: ""
+                    val engine = document.getString("Engine") ?: ""
+                    val description = document.getString("Details") ?: ""
+                    val mileage = document.getString("Mileage") ?: ""
+                    val Power = document.getString("Power") ?: ""
+                    val imageUrl = document.getString("Imageurl") ?: ""
+                    val myData = BikeModel(name,Brand,price,engine,description,mileage,Power,imageUrl)
+                    dataList.add(myData)
+                }
+
+                bikerecycleradapter = MyAdapter(activity as Context ,dataList)
+                FavouriteRecycler.adapter=bikerecycleradapter
+                FavouriteRecycler.layoutManager=layoutManager
+
+//                Bikerecycle.addItemDecoration(
+//                    DividerItemDecoration(Bikerecycle.context,
+//                        (layoutManager as LinearLayoutManager).orientation
+//                    )
+//                )
+            }
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                // this method is called
+                // when the item is moved.
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                // this method is called when we swipe our item to right direction.
+                // on below line we are getting the item at a particular position.
+                val deletedCourse: BikeModel =
+                    dataList.get(viewHolder.adapterPosition)
+
+                // below line is to get the position
+                // of the item at that position.
+                val position = viewHolder.adapterPosition
+
+                // this method is called when item is swiped.
+                // below line is to remove item from our array list.
+                dataList.removeAt(viewHolder.adapterPosition)
+                ////Below line is to remove Item from Database  Favourite////
+                db.collection("User").document(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .collection("Favourites").document(deletedCourse.name).delete()
+
+
+                // below line is to notify our item is removed from adapter.
+                bikerecycleradapter.notifyItemRemoved(viewHolder.adapterPosition)
+
+                // below line is to display our snackbar with action.
+                // below line is to display our snackbar with action.
+                // below line is to display our snackbar with action.
+                Snackbar.make(FavouriteRecycler, "Deleted " + deletedCourse.name,Snackbar.LENGTH_SHORT)
+                    .setAction(
+                        "Undo",
+                        View.OnClickListener {
+                            // adding on click listener to our action of snack bar.
+                            // below line is to add our item to array list with a position.
+                            dataList.add(position, deletedCourse)
+
+                            // below line is to notify item is
+                            // added to our adapter class.
+                            bikerecycleradapter.notifyItemInserted(position)
+                        }).show()
+            }
+            // at last we are adding this
+            // to our recycler view.
+        }).attachToRecyclerView(FavouriteRecycler)
+
+        /////////////////////////////////////////////////
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

@@ -6,11 +6,25 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:id="@+id/scrollparent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Detailsparent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Bike_Details"
+    android:id="@+id/Favparent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     android:background="@color/background">
 
     <androidx.appcompat.widget.Toolbar
@@ -23,26 +37,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/backbtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/baseline_navigate_before_24"
-        android:padding="5dp"
-        android:src="@drawable/baseline_navigate_before_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:layout_width="20dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_margin="20dp"
+        android:layout_margin="15dp"
+        android:id="@+id/backbtn"
+        android:padding="3dp"
+        app:cardElevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="100dp">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/baseline_navigate_before_24"
+        android:background="@color/background"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/wishlist"
-        android:src="@drawable/baseline_favorite_border_24"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/backbtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/backbtn">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/changewish"
+            android:background="@color/background"
+            android:padding="5dp"
+            android:src="@drawable/baseline_favorite_border_24" />
+    </androidx.cardview.widget.CardView>
 
     <ImageView
         android:id="@+id/imageView7"
@@ -60,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/bikedetailsbg"
-        android:padding="10dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout2">
@@ -119,7 +148,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:justificationMode="inter_word"
-                    android:padding="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="1dp"
                     android:textSize="18sp"
                     android:scrollbars="vertical" />
             </ScrollView>
@@ -135,7 +166,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/appCompatButton2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -158,13 +188,12 @@
             android:id="@+id/Linear"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:gravity="center"
-            android:padding="1dp">
+            android:gravity="center">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="104dp"
                 android:layout_height="92dp"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="2dp">
 
@@ -200,7 +229,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="104dp"
                 android:layout_height="92dp"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="2dp">
 
@@ -236,7 +265,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="104dp"
                 android:layout_height="92dp"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="2dp">
 
@@ -276,15 +305,24 @@
         android:id="@+id/appCompatButton2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:background="@color/uicolour"
         android:fontFamily="@font/poppins_medium"
         android:gravity="center"
         android:text="Book Now"
         android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/linearLayout4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
 </ScrollView>
+
 </layout>

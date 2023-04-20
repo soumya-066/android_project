@@ -20,7 +20,8 @@
         android:backgroundTint="#067B7B"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="10dp"
-        app:fabCradleVerticalOffset="0dp">
+        app:fabCradleVerticalOffset="0dp"
+        app:hideOnScroll="true">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -31,7 +32,7 @@
             app:menu="@menu/bottom_menu"
             app:itemIconTint="@color/white"
             app:compatShadowEnabled="true"
-            app:itemRippleColor="@color/green200"
+            app:itemRippleColor="@color/background"
             app:itemTextColor="@color/green200"
             />
     </com.google.android.material.bottomappbar.BottomAppBar>
