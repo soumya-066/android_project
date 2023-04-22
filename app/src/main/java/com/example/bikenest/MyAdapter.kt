@@ -45,4 +45,9 @@ class MyAdapter(val context: Context,private val dataList: List<BikeModel>) : Re
     }
 
     override fun getItemCount() = dataList.size
+
+
+
+
+
 }
