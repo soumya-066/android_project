@@ -60,6 +60,8 @@ dependencies {
     def lottieVersion = "5.2.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    implementation 'com.razorpay:checkout:1.6.26'
+
 
 
 }
