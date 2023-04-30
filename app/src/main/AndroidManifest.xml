@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BikeNest"
         tools:targetApi="31">
+        <activity
+            android:name=".Order"
+            android:exported="false" />
+
         <receiver
             android:name="com.razorpay.RzpTokenReceiver"
             tools:node="remove" />

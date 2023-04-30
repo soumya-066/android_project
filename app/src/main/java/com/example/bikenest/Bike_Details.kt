@@ -1,6 +1,8 @@
 package com.example.bikenest
 
+import android.app.DatePickerDialog
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
@@ -14,13 +16,22 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.razorpay.Checkout
-import com.razorpay.PaymentResultListener
+import com.razorpay.*
 import org.json.JSONObject
+import java.util.Calendar
+import java.util.UUID
+
+//import javax.mail.*
+//import javax.mail.internet.InternetAddress
+//import javax.mail.internet.MimeMessage
+
 
 class Bike_Details : AppCompatActivity(), PaymentResultListener {
 
     private lateinit var binding1: ActivityBikeDetailsBinding
+    val orders=Firebase.firestore.collection("User")
+    var orderfor=""
+    var myVariable: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,8 +122,25 @@ class Bike_Details : AppCompatActivity(), PaymentResultListener {
 
         binding1.desctv.movementMethod = ScrollingMovementMethod()
 
-        binding1.appCompatButton2.setOnClickListener {
-            paymentprocess(10)
+        binding1.calender.setOnClickListener {
+            val today = Calendar.getInstance()
+            val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                orderfor=dayOfMonth.toString()+"-"+monthOfYear.toString()+"-"+year.toString()
+            }, today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH+2))
+            datePickerDialog.show()
+        }
+
+        binding1.review.setOnClickListener {
+
+            startActivity(Intent(this,Order::class.java))
+        }
+
+
+            binding1.appCompatButton2.setOnClickListener {
+                if (orderfor.isNotEmpty()) {
+                    myVariable = orderfor
+                    paymentprocess(10)
+            }else Toast.makeText(this, "Please Select Date\nFor Your Ride", Toast.LENGTH_SHORT).show()
         }
 
         Checkout.preload(this@Bike_Details)
@@ -154,9 +182,39 @@ class Bike_Details : AppCompatActivity(), PaymentResultListener {
 
     override fun onPaymentSuccess(p0: String?) {
         Toast.makeText(this, "Payment Successful! Payment Id: $p0", Toast.LENGTH_SHORT).show()
+        if (p0 != null) {
+            addorderdata(p0)
+        }
+        
     }
 
     override fun onPaymentError(p0: Int, p1: String?) {
         Toast.makeText(this, "Payment Failed! Error: $p1", Toast.LENGTH_SHORT).show()
+    }
+    private fun addorderdata(id:String){
+
+        val uuid = UUID.randomUUID().toString().replace("-", "")
+        val timestamp = System.currentTimeMillis()
+
+        val currentUserID = FirebaseAuth.getInstance().currentUser?.uid
+        val userChildCollectionRef = orders.document(currentUserID!!).collection("Orders")
+        val data = hashMapOf(
+            "OrderDate" to "${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}/${Calendar.getInstance().get(Calendar.MONTH)+1}/${Calendar.getInstance().get(Calendar.YEAR)}",
+            "OrderedBike" to "${intent.getStringExtra("Model")}",
+            "Payment_id" to "${id}",
+            "Image_Url" to "${intent.getStringExtra("URL")}",
+            "Ordered_For" to "$myVariable"
+        )
+
+        val documentId = "$timestamp - $uuid"
+        userChildCollectionRef.document(documentId!!).set(data)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Ordered Successfully", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Don't Worry,Not Placed\nPlease Call Customer Care", Toast.LENGTH_SHORT).show()
+            }
+
+
     }
 }
