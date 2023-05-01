@@ -132,7 +132,7 @@ class Bike_Details : AppCompatActivity(), PaymentResultListener {
 
         binding1.review.setOnClickListener {
 
-            startActivity(Intent(this,Order::class.java))
+//            startActivity(Intent(this,Order::class.java))
         }
 
 

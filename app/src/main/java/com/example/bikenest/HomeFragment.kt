@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.viewpager.widget.ViewPager
 import com.airbnb.lottie.LottieAnimationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,6 +26,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import util.ConnectionManager
 import java.util.Locale
+import java.util.Timer
+import java.util.TimerTask
 import java.util.jar.Attributes
 
 class HomeFragment : Fragment() {
@@ -35,6 +39,10 @@ class HomeFragment : Fragment() {
     val db = Firebase.firestore
     var name: String? = ""
     var submitsearch: String? = ""
+    lateinit var viewPager: ViewPager
+    lateinit var viewPagerAdapter: SliderAdapter
+    lateinit var imageList: List<Int>
+    private var currentPage = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +61,7 @@ class HomeFragment : Fragment() {
         var KTM=view.findViewById<ImageView>(R.id.KTM)
         var BMW=view.findViewById<ImageView>(R.id.BMW)
         searchView=view.findViewById(R.id.searchView)
+        viewPager = view.findViewById(R.id.idViewPager)
 
             textview = view.findViewById(R.id.textView)
         var use = FirebaseAuth.getInstance().currentUser?.uid
@@ -117,8 +126,33 @@ class HomeFragment : Fragment() {
             startActivity(a)
         }
 
+        imageList = ArrayList<Int>()
+        imageList = imageList + R.drawable.banner00
+        imageList = imageList + R.drawable.banner0
+        imageList = imageList + R.drawable.banner3
+        imageList = imageList + R.drawable.banner5
+        imageList = imageList + R.drawable.banner1
 
+        // on below line we are initializing our view
+        // pager adapter and adding image list to it.
+        viewPagerAdapter = SliderAdapter(activity as Context, imageList)
 
+        // on below line we are setting
+        // adapter to our view pager.
+        viewPager.adapter = viewPagerAdapter
+        val handler = Handler()
+        val update = Runnable {
+            if (currentPage == imageList.size) {
+                currentPage = 0
+            }
+            viewPager.setCurrentItem(currentPage++, true)
+        }
+
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                handler.post(update)
+            }
+        }, 450, 2500)
 
     }
 }

@@ -121,7 +121,6 @@
                     android:id="@+id/UserPhoneNumber"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
-                    android:text="supriya.swain2018@gmail.com"
                     android:inputType="textEmailAddress"
                     android:maxLength="30"
                     tools:layout_editor_absoluteX="55dp"
@@ -157,7 +156,6 @@
                     android:id="@+id/PasswordForLogin"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
-                    android:text="supriya"
                     android:inputType="textPassword"
                     tools:layout_editor_absoluteX="55dp"
                     tools:layout_editor_absoluteY="470dp" />

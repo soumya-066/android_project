@@ -1,8 +1,12 @@
 package com.example.bikenest
 
 import android.content.Context
+import android.content.Intent
+import android.location.Geocoder
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +23,25 @@ class Order : AppCompatActivity() {
         setContentView(R.layout.activity_order)
         val OrderRecycle=findViewById<RecyclerView>(R.id.OrderRecycler)
         lateinit var layoutmanager:RecyclerView.LayoutManager
+
+        var Locatin=findViewById<Button>(R.id.Locatin)
+        Locatin.setOnClickListener {
+
+//            val latitude = 20.4220248
+//            val longitude = 86.4803588
+//            val address = "1600 Amphitheatre Parkway, Mountain View, CA"
+            val geocoder = Geocoder(this)
+//            val locationList = geocoder.getFromLocationName(address, 1)
+//            if (locationList!!.isNotEmpty()) {
+                val latitude = 19.0686
+                val longitude = 83.8164
+                val locationUri = Uri.parse("google.navigation:q=$latitude,$longitude&mode=d")
+                val mapIntent = Intent(Intent.ACTION_VIEW, locationUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
+//            }
+
+        }
 
 
 

@@ -1,5 +1,6 @@
 package com.example.bikenest
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ class ProfileFragment : Fragment() {
     lateinit var Username: TextView
     lateinit var email: TextView
     lateinit var Password: TextView
+    lateinit var edittext: TextView
 
     var name: String? = ""
     var mail: String? = ""
@@ -76,6 +78,12 @@ class ProfileFragment : Fragment() {
         Username = view.findViewById(R.id.Username)
         email = view.findViewById(R.id.email)
         Password = view.findViewById(R.id.Password)
+        edittext=view.findViewById(R.id.appCompatButton)
+
+        edittext.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(activity,Login::class.java))
+        }
 
 //        Username.isFocusable=false
 //        email.isFocusable=false

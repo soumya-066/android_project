@@ -18,8 +18,8 @@
 
     <item
         android:id="@+id/Wallet"
-        android:title="Wallet"
-        android:icon="@drawable/baseline_wallet_24"
+        android:title="Orders"
+        android:icon="@drawable/order"
         android:iconTint="#36AD02"/>
     <item
         android:id="@+id/Support"

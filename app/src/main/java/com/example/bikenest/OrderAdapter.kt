@@ -29,10 +29,10 @@ class OrderAdapter(val context: Context, private val dataList: List<OrderModel>)
 
     override fun onBindViewHolder(holder: MyOrderViewHolder, position: Int) {
         val currentoItem = dataList[position]
-        holder.bikename.text = currentoItem.oname
-        holder.orderdate.text = currentoItem.date
-        holder.orderfor.text = currentoItem.ford
-        holder.paymentid.text = currentoItem.PaymentId
+        holder.bikename.text = "Ordered"+currentoItem.oname
+        holder.orderdate.text = "On"+currentoItem.date
+        holder.orderfor.text = "for"+currentoItem.ford
+        holder.paymentid.text ="payment_id"+ currentoItem.PaymentId
         Glide.with(holder.itemView.context)
             .load(currentoItem.oimage)
             .into(holder.orderimage)

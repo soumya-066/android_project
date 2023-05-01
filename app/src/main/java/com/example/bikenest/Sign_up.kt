@@ -84,7 +84,8 @@ class Sign_up : AppCompatActivity() {
                                     .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
                                     .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
 
-                                Toast.makeText(this, "${auth.uid}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "User Registered", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this,MainActivity::class.java))
                             }
                             else
                             {

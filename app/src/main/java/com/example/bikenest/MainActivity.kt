@@ -1,6 +1,7 @@
 package com.example.bikenest
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -31,16 +32,22 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.Wallet -> {
-                    loadFragment(WalletFragment())
+                    gotoorder()
                     true
+//                    loadFragment(WalletFragment())
+//                    true
                 }
                 R.id.Favourite -> {
                     loadFragment(FavFragment())
                     true
                 }
                 R.id.Support -> {
-                    FirebaseAuth.getInstance().signOut()
-                    startActivity(Intent(this,Login::class.java))
+//                    FirebaseAuth.getInstance().signOut()
+//                    startActivity(Intent(this,Login::class.java))
+//                    true
+                    val phoneNumber = "9668185944" // replace this with your actual phone number
+                    val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+                    startActivity(dialIntent)
                     true
 
                 }
@@ -54,8 +61,17 @@ class MainActivity : AppCompatActivity() {
 
     }
       fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container1,fragment)
-        transaction.commit()
+//        val transaction = supportFragmentManager.beginTransaction()
+//        transaction.replace(R.id.container1,fragment)
+//        transaction.commit()
+
+          supportFragmentManager.beginTransaction().apply {
+              replace(R.id.container1, fragment)
+              addToBackStack(null)
+              commit()
+          }
+    }
+    fun gotoorder(){
+        startActivity(Intent(this,Order::class.java))
     }
 }
