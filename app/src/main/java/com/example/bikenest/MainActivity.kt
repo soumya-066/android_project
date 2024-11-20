@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 //                    FirebaseAuth.getInstance().signOut()
 //                    startActivity(Intent(this,Login::class.java))
 //                    true
-                    val phoneNumber = "9668185944" // replace this with your actual phone number
+                    val phoneNumber = "9348727746" // replace this with your actual phone number
                     val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
                     startActivity(dialIntent)
                     true
